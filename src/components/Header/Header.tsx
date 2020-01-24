@@ -1,21 +1,54 @@
-import React from 'react'
+import React, { useRef, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 
-import NavigationLink from '../../interfaces/NavigationLink.interface'
+import INavigationLink from '../../interfaces/NavigationLink'
+import Dropdown from '../UI/Dropdown/Dropdown'
 
-const links: NavigationLink[] = [
+const navigationLinks: INavigationLink[] = [
   { label: 'Skill Maxtrix', to: '/skill-matrix', exact: false },
-  { label: 'Users', to: '/users', exact: false },
-  { label: 'Auth', to: '/login', exact: false }
+  {
+    label: 'Users',
+    to: '/users',
+    exact: false,
+    subLinks: [
+      { label: 'Add', to: '/users/add', exact: false },
+      { label: 'List', to: '/users', exact: false },
+    ]
+  },
+  {
+    label: 'Auth', to: '/login', exact: false,
+    subLinks: [
+      { label: 'Sign In', to: '/login', exact: false },
+      { label: 'Sign Up', to: '/auth/signup', exact: false },
+    ]
+  }
 ]
 
 const Header: React.FC = () => {
+  useEffect(() => {
+    M.AutoInit();
+  })
+
   const renderLinks = () => {
-    return links.map((link, index) => (
+    return navigationLinks.map((link, index) => (
       <li key={index}>
-        <NavLink to={link.to}>
-          {link.label}
-        </NavLink>
+        {
+          link.subLinks ?
+            <>
+              <a
+                id={index + ''}
+                className="dropdown-trigger"
+                href="#!"
+                data-target={`dropdown${index}`}>
+                {link.label}
+                <i className="material-icons right">arrow_drop_down</i>
+              </a>
+              <Dropdown id={`dropdown${index}`} links={link.subLinks!} />
+            </> :
+            <NavLink to={link.to}>
+              {link.label}
+            </NavLink>
+        }
       </li>
     ))
   }

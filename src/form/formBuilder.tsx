@@ -1,4 +1,4 @@
-import { FormControlConfig, FormValidation, FormControl } from "../interfaces/Form.interfaces"
+import { FormControlConfig, FormValidation, FormControl } from "../interfaces/Form"
 const is = require('is_js');
 
 export const formBuilder = {

@@ -3,7 +3,8 @@ import './Auth.scss'
 
 import { Input } from '../../components/UI/Input/Input'
 import { formBuilder } from '../../form/formBuilder'
-import { FormControl } from '../../interfaces/Form.interfaces'
+import { FormControl } from '../../interfaces/Form'
+import Button from '../../components/UI/Button/Button'
 
 function createFormControls(): {[key: string]: FormControl} {
   return {
@@ -36,7 +37,7 @@ type AuthState = {
   formControls: {[key: string]: FormControl};
 }
 
-export default class Auth extends Component {
+export default class Auth extends Component<AuthState> {
   state: AuthState = {
     isFormValid: false,
     formControls: createFormControls()
@@ -88,6 +89,8 @@ export default class Auth extends Component {
 
         <form>
           {this.renderControls()}
+
+          <Button label="Login" type="primary"/>
         </form>
       </div>
     )

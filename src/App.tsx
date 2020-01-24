@@ -5,6 +5,7 @@ import Layout from './hoc/Layout/Layout';
 import Auth from './containers/Auth/Auth';
 import Users from './containers/Users/Users';
 import Home from './components/Home/Home';
+import SkillMatrix from './containers/SkillMatrix/SkillMatrix'
 
 const App: React.FC = () => {
   return (
@@ -14,6 +15,7 @@ const App: React.FC = () => {
           <Route component={Home} path="/" exact/>
           <Route component={Auth} path="/login"/>
           <Route component={Users} path="/users"/>
+          <Route component={SkillMatrix} path="/skill-matrix"/>
         </Switch>
       </Layout>
     </BrowserRouter>

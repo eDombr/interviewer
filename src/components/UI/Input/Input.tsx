@@ -32,7 +32,7 @@ export const Input: React.FC<InputProps> = (props) => {
         type={inputType} 
         value={props.value} 
         onChange={props.onChange} />
-      <label htmlFor={htmlFor} className="active">{props.label}</label>
+      <label htmlFor={htmlFor}>{props.label}</label>
       {isInvalid(props) ? <span className="helper-text" data-error={props.errorMessage || 'Type correct value'}></span> : null}
     </div>
   )
