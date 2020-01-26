@@ -84,15 +84,21 @@ export default class Auth extends Component<AuthState> {
 
   render() {
     return (
-      <div>
-        <h2>Authorization</h2>
+        <div className="row">
+          <div className="col s12 m8 offset-m2">
+            <h2 className="center-align">Authorization</h2>
 
-        <form>
-          {this.renderControls()}
+            <div className="card">
+              <div className="card-content">
+                <form>
+                  {this.renderControls()}
 
-          <Button label="Login" type="primary"/>
-        </form>
-      </div>
+                  <Button label="Login" type="primary"/>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
     )
   }
 }

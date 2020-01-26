@@ -4,6 +4,7 @@ type FloatingButtonProps = {
   type?: string;
   size?: string;
   icon: string;
+  clickButton?: () => void
 }
 
 const FloatingButton: React.FC<FloatingButtonProps> = (props) => {
@@ -31,7 +32,7 @@ const FloatingButton: React.FC<FloatingButtonProps> = (props) => {
   }
 
   return (
-    <button className={cls.join(' ')}><i className="material-icons">{props.icon}</i></button>
+    <button onClick={props.clickButton} className={cls.join(' ')}><i className="material-icons">{props.icon}</i></button>
   )
 }
 

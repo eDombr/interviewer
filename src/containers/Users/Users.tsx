@@ -2,12 +2,12 @@ import React, { Component } from 'react'
 import { User } from '../../interfaces/User'
 import UserTable from '../../components/UserTable/UserTable';
 import FloatingButton from '../../components/UI/FloatingButton/FloatingButton';
+import { Link } from 'react-router-dom';
 
 type UsersState = {
   users: User[];
 }
-
-export default class Users extends Component {
+class Users extends Component {
   state: UsersState = {
     users: [
       {
@@ -49,9 +49,13 @@ export default class Users extends Component {
         <UserTable users={this.state.users}/>
 
         <div className="right">
-          <FloatingButton type="success" size="large" icon="add"></FloatingButton>
+          <Link to="/users/create">
+            <FloatingButton type="success" size="large" icon="add"></FloatingButton>
+          </Link>
         </div>
       </div>
     )
   }
 }
+
+export default Users

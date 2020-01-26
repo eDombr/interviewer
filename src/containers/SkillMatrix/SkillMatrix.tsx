@@ -99,14 +99,14 @@ class SkillMatrix extends Component<SkillMatrixState> {
       {
         return <SkillGroup
                   key={group.id}
-                  group={group}/>
+                  {...group}/>
       })
   }
 
   render() {
     return (
       <div>
-        <h2>Skill Matrix</h2>
+        <h2>Skills</h2>
 
         <ul ref={this.collapsibleRef} className="collapsible">
           {this.renderGroup()}

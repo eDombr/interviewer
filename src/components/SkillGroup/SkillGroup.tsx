@@ -6,12 +6,12 @@ type SkillGroupProps = {
   group: ISkillGroup;
 }
 
-const SkillGroup: React.FC<SkillGroupProps> = (props) => {
+const SkillGroup: React.FC<ISkillGroup> = (props) => {
   const renderSkills = () => {
     return (
-      <ul>
-        {props.group.skills.map((skill => (
-          <SkillItem key={skill.id} skill={skill}/>
+      <ul className="collection">
+        {props.skills.map((skill => (
+          <SkillItem key={skill.id} {...skill}/>
         )))}
       </ul>
     )
@@ -21,9 +21,9 @@ const SkillGroup: React.FC<SkillGroupProps> = (props) => {
     <li>
       <div className="collapsible-header">
       <i className="material-icons">highlight</i>
-        {props.group.name}
+        {props.name}
       </div>
-      <div className="collapsible-body">
+      <div className="collapsible-body p0">
         {renderSkills()}
       </div>
     </li>
