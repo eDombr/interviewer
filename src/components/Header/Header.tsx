@@ -1,3 +1,4 @@
+import * as _ from 'lodash'
 import React, { useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 
@@ -30,7 +31,7 @@ const Header: React.FC = () => {
   })
 
   const renderLinks = () => {
-    return navigationLinks.map((link, index) => (
+    return _.map(navigationLinks, (link, index) => (
       <li key={index}>
         {
           link.subLinks ?

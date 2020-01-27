@@ -6,7 +6,7 @@ import Auth from './containers/Auth/Auth';
 import Users from './containers/Users/Users';
 import Home from './components/Home/Home';
 import SkillMatrix from './containers/SkillMatrix/SkillMatrix'
-import UserProfile from './containers/UserProfile/UserProfile';
+import UserProfile from './components/UserProfile/UserProfile';
 import UserEdit from './containers/UserEdit/UserEdit';
 
 const App: React.FC = () => {

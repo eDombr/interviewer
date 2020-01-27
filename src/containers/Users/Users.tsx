@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import { User } from '../../interfaces/User'
+import { IUser } from '../../interfaces/User'
 import UserTable from '../../components/UserTable/UserTable';
 import FloatingButton from '../../components/UI/FloatingButton/FloatingButton';
 import { Link } from 'react-router-dom';
 
 type UsersState = {
-  users: User[];
+  users: IUser[];
 }
 class Users extends Component {
   state: UsersState = {

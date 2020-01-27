@@ -1,17 +1,15 @@
 import React from 'react'
-import { User } from '../../interfaces/User';
+import { IUser } from '../../interfaces/User';
 import UserItem from './UserItem/UserItem';
 
 type UserTableProps = {
-  users: User[];
+  users: IUser[];
 }
 
 const UserTable: React.FC<UserTableProps> = (props) => {
   const renderUsers = () => {
     return props.users.map((user) => {
-      return (
-        <UserItem key={user.id} {...user}/>
-      )
+      return <UserItem key={user.id} {...user}/>
     });
   }
 

@@ -2,10 +2,6 @@ import React from 'react'
 import { ISkillGroup } from '../../interfaces/Skill'
 import SkillItem from './SkillItem/SkillItem'
 
-type SkillGroupProps = {
-  group: ISkillGroup;
-}
-
 const SkillGroup: React.FC<ISkillGroup> = (props) => {
   const renderSkills = () => {
     return (

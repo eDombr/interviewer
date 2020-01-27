@@ -1,10 +1,10 @@
 import React from 'react'
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-import { User } from '../../../interfaces/User';
+import { IUser } from '../../../interfaces/User';
 import FloatingButton from '../../UI/FloatingButton/FloatingButton';
 
-const UserItem: React.FC<User> = (props) => {
+const UserItem: React.FC<IUser> = (props) => {
 
   return (
     <tr>
@@ -12,13 +12,13 @@ const UserItem: React.FC<User> = (props) => {
       <td>{props.level}</td>
       <td>
         <Link to={`/users/profile/${props.id}`}>
-          <FloatingButton icon="face" />
+          <FloatingButton icon="face" size="small"/>
         </Link>
         <Link to={`/users/edit/${props.id}`}>
-          <FloatingButton icon="edit" type="warning" />
+          <FloatingButton icon="edit" type="warning" size="small"/>
         </Link>
         
-        <FloatingButton type="error" icon="delete_forever" />
+        <FloatingButton type="error" icon="delete_forever" size="small"/>
       </td>
     </tr>
   )
