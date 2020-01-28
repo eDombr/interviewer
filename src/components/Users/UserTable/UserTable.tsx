@@ -1,5 +1,5 @@
 import React from 'react'
-import { IUser } from '../../interfaces/User';
+import { IUser } from '../../../interfaces/User';
 import UserItem from './UserItem/UserItem';
 
 type UserTableProps = {

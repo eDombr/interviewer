@@ -1,44 +1,58 @@
-import React, { useState } from 'react'
-import { IUser } from '../../interfaces/User'
+import * as _ from 'lodash'
+import React, { useContext, useEffect } from 'react'
+import { UserContext } from '../../context/user/userContext'
+import Loading from '../UI/Loading/Loading'
 
-const UserProfile = () => {
-  const [user, setUser] = useState<IUser>({
-    id: 1,
-    firstName: 'Eugene',
-    lastName: 'Dombrovski',
-    email: 'eugene.dombrowsky@gmail.com',
-    level: 'middle',
-    education: 'Brest university named after A.S.Pushkin',
-    description: `Software developer specialized in WEB applications development. Talented at devising appropriate goals,knowledgeable in people management. Highly adaptable in quickly changing technical environments, alsohas strong technical, organizational, communication and analytical skills. Always ready for mastering ofnew technologies.Plodding, balanced, hardworking. I don't have bad habbits.Good health. I love outdoor activities and intellectual games.`,
-    currentPosition: 'Frontend Developer',
-    workHistory: [{
-      company: 'SmartexLab',
-      startDate: new Date(2016, 11, 12),
-      position: 'Frontend Developer'
-    }]
-  })
+const UserProfile: React.FC = () => {
+  const {user, getUser, loading} = useContext(UserContext)
+
+  useEffect(() => {
+    getUser(1)
+    // eslint-disable-next-line
+  }, [])
+
+  if (loading) {
+    return <Loading />
+  }
+
+  const renderWorkHistory = () => {
+    return _.map(user.workHistory, (workItem, index) => (
+      <div className=" row mb1" key={index}>
+        <div className="col s4">
+          <p className="mb0">{workItem.company}</p>
+          <small>{workItem.startDate.toLocaleDateString()} - {(workItem.endDate && workItem.endDate.toLocaleDateString()) || 'Present'}</small>
+        </div>
+        <div className="col s8">
+          <p>{workItem.position}</p>
+        </div>
+      </div>
+    ))
+  }
 
   return (
     <div>
       <h2>{user.firstName} {user.lastName}</h2>
 
-      <div className="row">
-        {user.currentPosition ? <p>{user.currentPosition}{user.level ? `, ${user.level}` : null}</p> : null}
+      {user.currentPosition ? <p>{user.currentPosition}{user.level ? `, ${user.level}` : null}</p> : null}
 
-        <h3>Education</h3>
-        <p>{user.education || 'Does not have an education'}</p>
+      <h3>Education</h3>
+      <p>{user.education || 'Does not have an education'}</p>
 
-        {
-          user.description ?
+      {
+        user.description ?
           <>
             <h3>Profile Summary</h3>
             <p>{user.description}</p>
           </> :
           null
-        }
-        
-        
-      </div>
+      }
+
+      <h3>Work History</h3>
+      {
+        user.workHistory ?
+          renderWorkHistory() :
+          null
+      }
     </div>
   )
 }

@@ -3,7 +3,7 @@ import M from 'materialize-css';
 
 import './SkillMatrix.scss'
 import { ISkillGroup } from '../../interfaces/Skill';
-import SkillGroup from '../../components/SkillGroup/SkillGroup';
+import SkillGroup from './SkillGroup/SkillGroup';
 
 type SkillMatrixState = {
   skillGroups: ISkillGroup[] 
@@ -19,22 +19,18 @@ class SkillMatrix extends Component<SkillMatrixState> {
           {
             id: 1,
             name: 'Code Standarts',
-            significance: 1
           },
           {
             id: 2,
             name: 'Design Patterns',
-            significance: 1
           },
           {
             id: 3,
             name: 'Code Review Process',
-            significance: 1
           },
           {
             id: 4,
             name: 'Troubleshooting',
-            significance: 1
           },
         ]
       },
@@ -45,22 +41,18 @@ class SkillMatrix extends Component<SkillMatrixState> {
           {
             id: 5,
             name: 'Algorithms / Data structures',
-            significance: 1
           },
           {
             id: 6,
             name: 'Web-common',
-            significance: 1
           },
           {
             id: 7,
             name: 'Authentication / Authorization',
-            significance: 1
           },
           {
             id: 8,
             name: 'Security basics',
-            significance: 1
           },
         ]
       },
@@ -71,17 +63,15 @@ class SkillMatrix extends Component<SkillMatrixState> {
           {
             id: 9,
             name: 'Angular',
-            significance: 1
+            linkToResource: 'https://angular.io/'
           },
           {
             id: 10,
             name: 'React',
-            significance: 1
           },
           {
             id: 11,
             name: 'VueJs',
-            significance: 1
           },
         ]
       }

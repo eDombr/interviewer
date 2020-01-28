@@ -6,7 +6,7 @@ export interface ISkillGroup {
 }
 
 export interface ISkill {
-    id?: number;
+    id: number;
     name: string;
-    significance: number;
+    linkToResource?: string;
 }

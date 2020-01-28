@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import './Auth.scss'
 
-import { Input } from '../../components/UI/Input/Input'
-import { formBuilder } from '../../form/formBuilder'
+import { Input } from '../UI/Input/Input'
+import { formBuilder } from '../../lib/formBuilder'
 import { FormControl } from '../../interfaces/Form'
-import Button from '../../components/UI/Button/Button'
+import Button from '../UI/Button/Button'
 
 function createFormControls(): {[key: string]: FormControl} {
   return {

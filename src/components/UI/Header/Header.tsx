@@ -2,8 +2,8 @@ import * as _ from 'lodash'
 import React, { useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 
-import INavigationLink from '../../interfaces/NavigationLink'
-import Dropdown from '../UI/Dropdown/Dropdown'
+import INavigationLink from '../../../interfaces/NavigationLink'
+import Dropdown from '../Dropdown/Dropdown'
 
 const navigationLinks: INavigationLink[] = [
   { label: 'Skill Maxtrix', to: '/skill-matrix', exact: false },
@@ -57,7 +57,7 @@ const Header: React.FC = () => {
   return (
     <nav>
       <div className="nav-wrapper blue darken-1 px1">
-        <NavLink to="/" exact={true} className="brand-logo">Logo</NavLink>
+        <NavLink to="/" exact className="brand-logo">Logo</NavLink>
         <ul id="nav-mobile" className="right hide-on-med-and-down">
           {renderLinks()}
         </ul>

@@ -4,7 +4,7 @@ export interface IUser {
   lastName: string;
   email: string;
   password?: string;
-  level: string;
+  level?: string;
   education?: string;
   description?: string;
   currentPosition?: string;
