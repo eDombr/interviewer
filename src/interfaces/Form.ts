@@ -1,17 +1,23 @@
 export interface FormControlConfig {
   label: string;
-  errorMessage: string;
   type?: string;
   id?: string | number;
 }
 
 export interface FormValidation {
-  [key: string]: boolean | number;
+  required?: boolean;
+  minLength?: number;
+  email?: boolean;
 }
 
 export interface FormControl extends FormControlConfig {
-  validation: FormValidation;
+  validation?: FormValidation;
+  errorMessage?: string;
   valid: boolean;
   touched: boolean;
   value: string;
+}
+
+export interface FormControlCollection {
+  [key: string]: FormControl
 }

@@ -2,7 +2,7 @@ import { FormControlConfig, FormValidation, FormControl } from "../interfaces/Fo
 const is = require('is_js');
 
 export const formBuilder = {
-  createControl: (config: FormControlConfig, validation: FormValidation): FormControl => {
+  createControl: (config: FormControlConfig, validation?: FormValidation): FormControl => {
     return {
       ...config,
       validation,
@@ -48,7 +48,7 @@ export const formBuilder = {
       return '';
     }
   
-    let errorMessage = '';
+    let errorMessage = `Enter correct ${label}`;
 
     if (!value) {
       if (validation.required) {
