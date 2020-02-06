@@ -1,11 +1,9 @@
+import * as _ from 'lodash';
+
 import React, { useState } from 'react'
 import { FormControlCollection } from '../../interfaces/Form'
 import { formBuilder } from '../../lib/formBuilder'
 import Form from '../UI/Form/Form'
-
-type UserEditState = {
-  formControls: FormControlCollection;
-}
 
 const createFormControls = (): FormControlCollection => ({
   firstName: formBuilder.createControl(
@@ -18,7 +16,7 @@ const createFormControls = (): FormControlCollection => ({
   ),
   email: formBuilder.createControl(
     { label: 'Email' },
-    { required: true }
+    { required: true, email: true }
   ),
   level: formBuilder.createControl(
     { label: 'Level' },
@@ -32,16 +30,43 @@ const createFormControls = (): FormControlCollection => ({
   description: formBuilder.createControl(
     { label: 'Description', type: 'textarea' },
   ),
+  workHistory: formBuilder.createControl(
+    { label: 'Work History', type: 'group', groups: [] }
+  )
 })
+
+const createWorkHistoryItem = (): FormControlCollection => ({
+  company: formBuilder.createControl(
+    { label: 'Company' }, { required: true }
+  ),
+  position: formBuilder.createControl(
+    { label: 'Position' }
+  ),
+  startDate: formBuilder.createControl(
+    { label: 'Start Date', type: 'date' }
+  ),
+  endDate: formBuilder.createControl(
+    { label: 'End Date', type: 'date' }
+  ),
+});
 
 const UserEdit: React.FC = () => {
 
-  const [state, setState] = useState<UserEditState>({
-    formControls: createFormControls()
-  });
+  const [formControls, setFormControls] = useState<FormControlCollection>(
+    createFormControls()
+  );
 
   const onChangeHandler = (formControls: FormControlCollection) => {
-    setState({ formControls })
+    setFormControls(formControls)
+  }
+
+  const onAddFormGroupHandler = (groupName: string): void => {
+    const controls: any = _.cloneDeep(formControls)
+    const control = controls[groupName];
+
+    control.groups!.push(createWorkHistoryItem())
+
+    setFormControls(controls)
   }
 
   return (
@@ -50,7 +75,8 @@ const UserEdit: React.FC = () => {
         <h2 className="center-align">Edit User</h2>
 
         <Form 
-          formControls={state.formControls}
+          formControls={formControls}
+          onAddGroup={onAddFormGroupHandler}
           onChange={onChangeHandler}/>
 
       </div>

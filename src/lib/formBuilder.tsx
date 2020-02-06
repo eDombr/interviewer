@@ -1,3 +1,4 @@
+import * as _ from 'lodash'
 import { FormControlConfig, FormValidation, FormControl } from "../interfaces/Form"
 const is = require('is_js');
 
@@ -17,29 +18,38 @@ export const formBuilder = {
     }
   
     let isValid = true;
+
+    if (_.isString(value)) {
+      if (validation.required) {
+        isValid = !!value.trim() && isValid;
+      }
   
-    if (validation.required) {
-      isValid = !!value.trim() && isValid;
+      if (validation.email) {
+        isValid = is.email(value) && isValid
+      }
+  
+      if (validation.minLength) {
+        isValid = value.length >= validation.minLength && isValid
+      }
     }
-
-    if (validation.email) {
-      isValid = is.email(value) && isValid
-    }
-
-    if (validation.minLength) {
-      isValid = value.length >= validation.minLength && isValid
-    }
+  
   
     return isValid;
   },
   validateForm: (formControls: {[key: string]: FormControl}): boolean => {
     let isFormValid = true;
-  
-    for (let control in formControls) {
-      if (formControls.hasOwnProperty(control)) {
-        isFormValid = formControls[control].valid && isFormValid
+
+    _.forEach(formControls, (control) => {
+      if (control.type === 'group') {
+        _.forEach(control.groups, group => {
+          _.forEach(group, groupControl => {
+            isFormValid = groupControl.valid && isFormValid
+          })
+        })
+      } else {
+        isFormValid = control.valid && isFormValid
       }
-    }
+    })
   
     return isFormValid;
   },
@@ -59,7 +69,7 @@ export const formBuilder = {
         errorMessage = `Email is incorrect`
       }
   
-      if (validation.minLength) {
+      if (validation.minLength && _.isString(value)) {
         errorMessage = `You entered ${value.length} characters. Minimum should be ${validation.minLength}`
       }
     }

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
+import M from 'materialize-css'
 
 type InputProps = {
   type?: string;
@@ -8,19 +9,34 @@ type InputProps = {
   touched: boolean;
   errorMessage?: string;
   shouldValidate: boolean;
-  onChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  onChange: (value: string) => void;
 }
 
 function isInvalid({ valid, touched, shouldValidate }: { valid: boolean, touched: boolean, shouldValidate: boolean }) {
   return !valid && shouldValidate && touched;
 }
 
-export const Input: React.FC<InputProps> = (props) => {
-  const inputType: string = props.type || 'text'
+export const Input: React.FC<InputProps> = ({type, value, onChange, label, errorMessage, touched, valid, shouldValidate}) => {
+  const inputType: string = type || 'text'
   const htmlFor: string = `${inputType}-${Math.random()}`
   const cls = ['validate'];
 
-  if (isInvalid(props)) {
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    if (inputRef.current) {
+      const defaultDate = value ? new Date(value) : new Date();
+      M.Datepicker.init(inputRef.current!, {
+        defaultDate,
+        setDefaultDate: true,
+        onSelect: (value) => {
+          onChange(value.toDateString());
+        }
+      })
+    }
+  }, [inputRef, value, onChange])
+
+  if (isInvalid({valid, shouldValidate, touched})) {
     cls.push('invalid')
   }
 
@@ -28,24 +44,39 @@ export const Input: React.FC<InputProps> = (props) => {
     cls.push('materialize-textarea')
   }
 
+  if (inputType === 'date') {
+    cls.push('datepicker')
+  }
+
+  const renderInput = () => {
+    switch(inputType) {
+      case 'textarea':
+        return <textarea
+                  className={cls.join(' ')}
+                  id={htmlFor}
+                  value={value}
+                  onChange={event => onChange(event.target.value)} />
+      case 'date':
+        return <input
+                  className={cls.join(' ')}
+                  id={htmlFor}
+                  type="text"
+                  ref={inputRef} />
+      default:
+        return <input
+                  className={cls.join(' ')}
+                  id={htmlFor}
+                  type={inputType}
+                  value={value}
+                  onChange={event => onChange(event.target.value)} />
+    }
+  }
+
   return (
     <div className="input-field">
-      {
-        inputType === 'textarea' ?
-          <textarea
-            className={cls.join(' ')}
-            id={htmlFor}
-            value={props.value}
-            onChange={props.onChange} /> :
-          <input
-            className={cls.join(' ')}
-            id={htmlFor}
-            type={inputType}
-            value={props.value}
-            onChange={props.onChange} />
-      }
-      <label htmlFor={htmlFor}>{props.label}</label>
-      {isInvalid(props) ? <span className="helper-text" data-error={props.errorMessage || 'Type correct value'}></span> : null}
+      {renderInput()}
+      <label htmlFor={htmlFor}>{label}</label>
+      {isInvalid({valid, shouldValidate, touched}) ? <span className="helper-text" data-error={errorMessage || 'Type correct value'}></span> : null}
     </div>
   )
 }

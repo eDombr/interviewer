@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { MouseEvent } from 'react'
 
 type FloatingButtonProps = {
   type?: string;
@@ -31,8 +31,14 @@ const FloatingButton: React.FC<FloatingButtonProps> = (props) => {
       cls.push('blue')
   }
 
+  const onClickHandler = (event: MouseEvent<HTMLButtonElement>): void => {
+    event.preventDefault()
+
+    props.clickButton!()
+  }
+
   return (
-    <button onClick={props.clickButton} className={cls.join(' ')}><i className="material-icons">{props.icon}</i></button>
+    <button onClick={(event) => onClickHandler(event)} className={cls.join(' ')}><i className="material-icons">{props.icon}</i></button>
   )
 }
 

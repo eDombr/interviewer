@@ -1,6 +1,7 @@
 export interface FormControlConfig {
   label: string;
   type?: string;
+  groups?: FormControlCollection[];
   id?: string | number;
 }
 
@@ -16,6 +17,13 @@ export interface FormControl extends FormControlConfig {
   valid: boolean;
   touched: boolean;
   value: string;
+  groups?: FormControlCollection[];
+}
+
+export interface FormGroup {
+  label: string;
+  type: string;
+  groups?: FormControlCollection[];
 }
 
 export interface FormControlCollection {
