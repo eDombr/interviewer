@@ -4,10 +4,14 @@ import { UserContext } from '../../context/user/userContext'
 import Loading from '../UI/Loading/Loading'
 
 const UserProfile: React.FC = () => {
-  const {user, getUser, loading} = useContext(UserContext)
+  const {user, getUser, clearUser, loading} = useContext(UserContext)
 
   useEffect(() => {
     getUser(1)
+
+    return () => {
+      clearUser()
+    }
     // eslint-disable-next-line
   }, [])
 

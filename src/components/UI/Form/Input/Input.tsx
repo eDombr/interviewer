@@ -22,6 +22,7 @@ export const Input: React.FC<InputProps> = ({type, value, onChange, label, error
   const cls = ['validate'];
 
   const inputRef = useRef<HTMLInputElement>(null)
+  const textareaRef = useRef<HTMLTextAreaElement>(null)
 
   useEffect(() => {
     if (inputRef.current) {
@@ -34,7 +35,15 @@ export const Input: React.FC<InputProps> = ({type, value, onChange, label, error
         }
       })
     }
-  }, [inputRef, value, onChange])
+    // eslint-disable-next-line
+  }, [inputRef, value])
+
+  useEffect(() => {
+    if (textareaRef.current && value) {
+      M.textareaAutoResize(textareaRef.current)
+    }
+    // eslint-disable-next-line
+  }, [textareaRef, value])
 
   if (isInvalid({valid, shouldValidate, touched})) {
     cls.push('invalid')
@@ -55,6 +64,7 @@ export const Input: React.FC<InputProps> = ({type, value, onChange, label, error
                   className={cls.join(' ')}
                   id={htmlFor}
                   value={value}
+                  ref={textareaRef}
                   onChange={event => onChange(event.target.value)} />
       case 'date':
         return <input
