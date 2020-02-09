@@ -61,7 +61,7 @@ const usersData = {
 
 export const initialUserState: IUserState = {
   users: [],
-  user: {},
+  user: null,
   loading: false
 }
 
@@ -88,13 +88,19 @@ export const UserState: React.FC = ({ children }) => {
     })
   }
 
+  const clearUser = () => {
+    dispatch({
+      type: ActionTypes.CLEAR_USER
+    })
+  }
+
   const setLoading = () => dispatch({type: ActionTypes.SET_LOADING})
 
   const { users, user, loading } = state
 
   return (
     <UserContext.Provider value={{
-      users, user, loading, getUsers, getUser, setLoading
+      users, user, loading, getUsers, getUser, setLoading, clearUser
     }}>
       {children}
     </UserContext.Provider>

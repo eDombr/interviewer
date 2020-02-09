@@ -1,9 +1,13 @@
-import * as _ from 'lodash';
+import * as _ from 'lodash'
+import M from 'materialize-css'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { FormControlCollection } from '../../interfaces/Form'
 import { formBuilder } from '../../lib/formBuilder'
 import Form from '../UI/Form/Form'
+import { useParams } from 'react-router-dom'
+import { UserContext } from '../../context/user/userContext'
+import { IUser, IWorkHistoryItem } from '../../interfaces/User'
 
 const createFormControls = (): FormControlCollection => ({
   firstName: formBuilder.createControl(
@@ -24,8 +28,8 @@ const createFormControls = (): FormControlCollection => ({
   education: formBuilder.createControl(
     { label: 'Education' },
   ),
-  currecntPosition: formBuilder.createControl(
-    { label: 'currentPosition' },
+  currentPosition: formBuilder.createControl(
+    { label: 'Current Position' },
   ),
   description: formBuilder.createControl(
     { label: 'Description', type: 'textarea' },
@@ -51,17 +55,43 @@ const createWorkHistoryItem = (): FormControlCollection => ({
 });
 
 const UserEdit: React.FC = () => {
+  const { getUser, clearUser, user } = useContext(UserContext)
+  const { id } = useParams()
 
-  const [formControls, setFormControls] = useState<FormControlCollection>(
+  const [formControls, setFormControls] = useState<any>(
     createFormControls()
-  );
+  )
+
+  useEffect(() => {
+    if (id) {
+      getUser(+id)
+    } else {
+      clearUser()
+    }
+
+    return () => {
+      clearUser()
+    }
+    // eslint-disable-next-line
+  }, [id])
+
+  useEffect(() => {
+    if (user) {
+      fillFormControls(user)
+
+      M.updateTextFields()
+    } else {
+      setFormControls(createFormControls())
+    }
+    // eslint-disable-next-line
+  }, [user])
 
   const onChangeHandler = (formControls: FormControlCollection) => {
     setFormControls(formControls)
   }
 
   const onAddFormGroupHandler = (groupName: string): void => {
-    const controls: any = _.cloneDeep(formControls)
+    const controls: FormControlCollection = _.cloneDeep(formControls)
     const control = controls[groupName];
 
     control.groups!.push(createWorkHistoryItem())
@@ -69,10 +99,34 @@ const UserEdit: React.FC = () => {
     setFormControls(controls)
   }
 
+  const fillFormControls = (user: IUser): void => {
+    const controls: any = _.cloneDeep(formControls)
+
+    _.forEach(user, (value, key) => {
+      if (key !== 'workHistory') {
+        if (controls[key]) {
+          controls[key].value = value
+        }
+      } else {
+        _.forEach(value as IWorkHistoryItem[], (workHistoryItem: IWorkHistoryItem, index: string | number) => {
+          controls[key].groups.push(createWorkHistoryItem())
+        
+          _.forEach(workHistoryItem as IWorkHistoryItem, (historyItemValue: string | Date | undefined, historyItemKey: string) => {
+            controls[key].groups[index][historyItemKey].value = historyItemValue;
+          })
+        })
+      }
+    })
+
+    setFormControls(controls)
+  }
+
   return (
     <div className="row">
       <div className="col s12 m8 offset-m2">
-        <h2 className="center-align">Edit User</h2>
+        <h2 className="center-align">
+          {`${id ? 'Edit' : 'Create'} User`}
+        </h2>
 
         <Form 
           formControls={formControls}

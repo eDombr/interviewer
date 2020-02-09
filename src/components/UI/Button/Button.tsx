@@ -28,9 +28,11 @@ const Button: React.FC<ButtonProps> = (props) => {
   }
 
   const onClickHandler = (event: MouseEvent<HTMLButtonElement>): void => {
-    event.preventDefault()
+    if (props.clickButton) {
+      event.preventDefault()
 
-    props.clickButton!()
+      props.clickButton()
+    }
   }
 
   return (

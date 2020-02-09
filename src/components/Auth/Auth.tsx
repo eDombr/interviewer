@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import './Auth.scss'
 
 import { formBuilder } from '../../lib/formBuilder'
@@ -29,30 +29,24 @@ function createFormControls(): FormControlCollection {
   }
 }
 
-type AuthState = {
-  formControls: FormControlCollection;
-}
+const Auth: React.FC = () => {
+  const [formControls, setFormControls] = useState<FormControlCollection>(createFormControls())
 
-export default class Auth extends Component<AuthState> {
-  state: AuthState = {
-    formControls: createFormControls()
+  const onChangeHandler = (formControls: FormControlCollection): void => {
+    setFormControls(formControls)
   }
 
-  onChangeHandler = (formControls: FormControlCollection): void => {
-    this.setState({ formControls })
-  }
+  return (
+    <div className="row">
+      <div className="col s12 m8 offset-m2">
+        <h2 className="center-align">Authorization</h2>
 
-  render() {
-    return (
-      <div className="row">
-        <div className="col s12 m8 offset-m2">
-          <h2 className="center-align">Authorization</h2>
-
-          <Form 
-            formControls={this.state.formControls}
-            onChange={this.onChangeHandler}/>
-        </div>
+        <Form 
+          formControls={formControls}
+          onChange={onChangeHandler}/>
       </div>
-    )
-  }
+    </div>
+  )
 }
+
+export default Auth;

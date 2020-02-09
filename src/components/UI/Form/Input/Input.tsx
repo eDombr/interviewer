@@ -75,7 +75,7 @@ export const Input: React.FC<InputProps> = ({type, value, onChange, label, error
   return (
     <div className="input-field">
       {renderInput()}
-      <label htmlFor={htmlFor}>{label}</label>
+      <label htmlFor={htmlFor} className={`${value ? 'active': ''}`}>{label}</label>
       {isInvalid({valid, shouldValidate, touched}) ? <span className="helper-text" data-error={errorMessage || 'Type correct value'}></span> : null}
     </div>
   )

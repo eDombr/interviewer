@@ -32,9 +32,11 @@ const FloatingButton: React.FC<FloatingButtonProps> = (props) => {
   }
 
   const onClickHandler = (event: MouseEvent<HTMLButtonElement>): void => {
-    event.preventDefault()
+    if (props.clickButton) {
+      event.preventDefault()
 
-    props.clickButton!()
+      props.clickButton()
+    }
   }
 
   return (

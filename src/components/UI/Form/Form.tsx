@@ -4,7 +4,6 @@ import { FormControlCollection, FormControl } from '../../../interfaces/Form'
 import { Input } from './Input/Input'
 import Button from '../Button/Button'
 import { formBuilder } from '../../../lib/formBuilder'
-import FloatingButton from '../FloatingButton/FloatingButton'
 
 type FormProps = {
   formControls: FormControlCollection;

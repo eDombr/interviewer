@@ -11,6 +11,8 @@ const UserProfile: React.FC = () => {
     // eslint-disable-next-line
   }, [])
 
+  console.log(loading)
+
   if (loading) {
     return <Loading />
   }
@@ -30,6 +32,7 @@ const UserProfile: React.FC = () => {
   }
 
   return (
+    user ? 
     <div>
       <h2>{user.firstName} {user.lastName}</h2>
 
@@ -53,7 +56,8 @@ const UserProfile: React.FC = () => {
           renderWorkHistory() :
           null
       }
-    </div>
+    </div> :
+    null
   )
 }
 

@@ -2,5 +2,6 @@ export enum ActionTypes {
     GET_USERS = 'GET_USERS',
     CLEAR_USERS = 'CLEAR_USERS',
     GET_USER = 'GET_USER',
+    CLEAR_USER = 'CLEAR_USER',
     SET_LOADING = 'SET_LOADING'
 }
