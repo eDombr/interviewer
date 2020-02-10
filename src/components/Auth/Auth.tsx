@@ -4,6 +4,7 @@ import './Auth.scss'
 import { formBuilder } from '../../lib/formBuilder'
 import { FormControlCollection } from '../../interfaces/Form'
 import Form from '../UI/Form/Form'
+import { InputType } from '../../constants/Form'
 
 function createFormControls(): FormControlCollection {
   return {
@@ -19,7 +20,7 @@ function createFormControls(): FormControlCollection {
     password: formBuilder.createControl(
       {
         label: 'Password',
-        type: 'password'
+        type: InputType.PASSWORD
       },
       {
         required: true,
@@ -49,4 +50,4 @@ const Auth: React.FC = () => {
   )
 }
 
-export default Auth;
+export default Auth

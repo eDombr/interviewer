@@ -1,5 +1,5 @@
 import React from 'react'
-import { ISkillGroup } from '../../../interfaces/Skill'
+import { ISkillGroup } from '../../../../interfaces/Skill'
 import SkillItem from './SkillItem/SkillItem'
 
 const SkillGroup: React.FC<ISkillGroup> = (props) => {

@@ -94,7 +94,7 @@ export const UserState: React.FC = ({ children }) => {
     })
   }
 
-  const setLoading = () => dispatch({type: ActionTypes.SET_LOADING})
+  const setLoading = () => dispatch({type: ActionTypes.SET_USER_LOADING})
 
   const { users, user, loading } = state
 

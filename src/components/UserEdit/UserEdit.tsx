@@ -8,6 +8,7 @@ import Form from '../UI/Form/Form'
 import { useParams } from 'react-router-dom'
 import { UserContext } from '../../context/user/userContext'
 import { IUser, IWorkHistoryItem } from '../../interfaces/User'
+import { InputType } from '../../constants/Form'
 
 const createFormControls = (): FormControlCollection => ({
   firstName: formBuilder.createControl(
@@ -32,10 +33,10 @@ const createFormControls = (): FormControlCollection => ({
     { label: 'Current Position' },
   ),
   description: formBuilder.createControl(
-    { label: 'Description', type: 'textarea' },
+    { label: 'Description', type: InputType.TEXTAREA },
   ),
   workHistory: formBuilder.createControl(
-    { label: 'Work History', type: 'group', groups: [] }
+    { label: 'Work History', type: InputType.GROUP, groups: [] }
   )
 })
 
@@ -47,10 +48,10 @@ const createWorkHistoryItem = (): FormControlCollection => ({
     { label: 'Position' }
   ),
   startDate: formBuilder.createControl(
-    { label: 'Start Date', type: 'date' }
+    { label: 'Start Date', type: InputType.DATE }
   ),
   endDate: formBuilder.createControl(
-    { label: 'End Date', type: 'date' }
+    { label: 'End Date', type: InputType.DATE }
   ),
 });
 

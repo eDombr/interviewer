@@ -1,9 +1,10 @@
 import * as _ from 'lodash'
-import React, { useState } from 'react'
+import React, { useState, ReactNode, ReactNodeArray } from 'react'
 import { FormControlCollection, FormControl } from '../../../interfaces/Form'
 import { Input } from './Input/Input'
 import Button from '../Button/Button'
 import { formBuilder } from '../../../lib/formBuilder'
+import { InputType } from '../../../constants/Form'
 
 type FormProps = {
   formControls: FormControlCollection;
@@ -56,7 +57,7 @@ const Form: React.FC<FormProps> = (props) => {
     props.onChange(formControls)
   }
 
-  const renderControl = (control: FormControl, controlName: string, groupName?: string, groupIndex?: number) => {
+  const renderControl = (control: FormControl, controlName: string, groupName?: string, groupIndex?: number): ReactNode => {
     return <Input
       label={control.label}
       value={control.value}
@@ -68,6 +69,33 @@ const Form: React.FC<FormProps> = (props) => {
       onChange={(value: string) => onChangeHandler(value, controlName, groupName, groupIndex)} />
   }
 
+  const renderGroups = (control: FormControl, controlName: string): ReactNodeArray => {
+    return _.map(control.groups, (group, groupIndex) => {
+      const keys = _.keys(group);
+
+      return (
+        <div className="card" key={groupIndex}>
+          <div className="card-content">
+            <i onClick={() => onRemoveGroupHandler(controlName, +groupIndex)} className="cursor-pointer card-close right material-icons">close</i>
+            <div>
+              {
+                _.map(keys, (groupControlName, groupControlIndex) => {
+                  const groupControl = group[groupControlName];
+
+                  return (
+                    <React.Fragment key={groupControlIndex}>
+                      {renderControl(groupControl, groupControlName, controlName, +groupIndex)}
+                    </React.Fragment>
+                  )
+                })
+              }
+            </div>
+          </div>
+        </div>
+      )
+    })
+  }
+
   return (
     <div className="card">
       <div className="card-content">
@@ -77,36 +105,11 @@ const Form: React.FC<FormProps> = (props) => {
             _.map(fromControlsKeys, (controlName, index) => {
               const control = props.formControls[controlName];
 
-              if (control.type === 'group') {
+              if (control.type === InputType.GROUP) {
                 return (
                   <React.Fragment key={index}>
                     <h4>{control.label}</h4>
-                    {
-                      _.map(control.groups, (group, groupIndex) => {
-                        const keys = _.keys(group);
-
-                        return (
-                          <div className="card" key={groupIndex}>
-                            <div className="card-content">
-                              <i onClick={() => onRemoveGroupHandler(controlName, +groupIndex)} className="cursor-pointer card-close right material-icons">close</i>
-                              <div>
-                                {
-                                  _.map(keys, (groupControlName, groupControlIndex) => {
-                                    const groupControl = group[groupControlName];
-
-                                    return (
-                                      <React.Fragment key={groupControlIndex}>
-                                        {renderControl(groupControl, groupControlName, controlName, +groupIndex)}
-                                      </React.Fragment>
-                                    )
-                                  })
-                                }
-                              </div>
-                            </div>
-                          </div>
-                        )
-                      })
-                    }
+                    {renderGroups(control, controlName)}
                     <div className="mb1">
                       <Button label="Add" clickButton={() => props.onAddGroup!(controlName)}  type="success"></Button>
                     </div>

@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import M from 'materialize-css'
+import { InputType } from '../../../../constants/Form';
 
 type InputProps = {
   type?: string;
@@ -17,7 +18,7 @@ function isInvalid({ valid, touched, shouldValidate }: { valid: boolean, touched
 }
 
 export const Input: React.FC<InputProps> = ({type, value, onChange, label, errorMessage, touched, valid, shouldValidate}) => {
-  const inputType: string = type || 'text'
+  const inputType: string = type || InputType.TEXT
   const htmlFor: string = `${inputType}-${Math.random()}`
   const cls = ['validate'];
 
@@ -39,7 +40,7 @@ export const Input: React.FC<InputProps> = ({type, value, onChange, label, error
   }, [inputRef, value])
 
   useEffect(() => {
-    if (textareaRef.current && value) {
+    if (textareaRef.current) {
       M.textareaAutoResize(textareaRef.current)
     }
     // eslint-disable-next-line
@@ -49,11 +50,11 @@ export const Input: React.FC<InputProps> = ({type, value, onChange, label, error
     cls.push('invalid')
   }
 
-  if (inputType === 'textarea') {
+  if (inputType === InputType.TEXTAREA) {
     cls.push('materialize-textarea')
   }
 
-  if (inputType === 'date') {
+  if (inputType === InputType.DATE) {
     cls.push('datepicker')
   }
 

@@ -1,6 +1,8 @@
+import { InputType } from './../constants/Form';
+
 export interface FormControlConfig {
   label: string;
-  type?: string;
+  type?: InputType;
   groups?: FormControlCollection[];
   id?: string | number;
 }

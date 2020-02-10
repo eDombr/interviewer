@@ -2,20 +2,22 @@ import * as _ from 'lodash'
 import React, { useContext, useEffect } from 'react'
 import { UserContext } from '../../context/user/userContext'
 import Loading from '../UI/Loading/Loading'
+import { useParams } from 'react-router-dom'
 
 const UserProfile: React.FC = () => {
   const {user, getUser, clearUser, loading} = useContext(UserContext)
+  const { id } = useParams()
 
   useEffect(() => {
-    getUser(1)
+    if (id) {
+      getUser(+id)
+    }
 
     return () => {
       clearUser()
     }
     // eslint-disable-next-line
-  }, [])
-
-  console.log(loading)
+  }, [id])
 
   if (loading) {
     return <Loading />

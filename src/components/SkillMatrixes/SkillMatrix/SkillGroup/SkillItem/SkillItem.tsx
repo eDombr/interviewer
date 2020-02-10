@@ -1,5 +1,5 @@
 import React from 'react'
-import { ISkill } from '../../../../interfaces/Skill'
+import { ISkill } from '../../../../../interfaces/Skill'
 
 const SkillItem: React.FC<ISkill> = (props) => {
   return (
