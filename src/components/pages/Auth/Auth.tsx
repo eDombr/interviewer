@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import './Auth.scss'
 
-import { formBuilder } from '../../lib/formBuilder'
-import { FormControlCollection } from '../../interfaces/Form'
-import Form from '../UI/Form/Form'
-import { InputType } from '../../constants/Form'
+import { formBuilder } from '../../../lib/formBuilder'
+import { FormControlCollection } from '../../../interfaces/Form'
+import Form from '../../UI/Form/Form'
+import { InputType } from '../../../constants/Form'
 
 function createFormControls(): FormControlCollection {
   return {

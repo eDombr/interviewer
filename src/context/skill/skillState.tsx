@@ -1,24 +1,26 @@
+import * as _ from 'lodash'
 import React, { useReducer } from 'react';
-import { SkillMatrixContext } from './skillMartixContext';
-import { ISkillMatrix } from '../../interfaces/Skill';
-import { skillMatrixReducer } from './skillMatrixReducer';
+import { SkillContext } from './skillContext';
+import { ISkill, ISkillTopic } from '../../interfaces/Skill';
+import { skillReducer } from './skillReducer';
 import { ActionTypes } from '../actionTypes';
 
-export interface ISkillMatrixState {
-  skillMatrixes: ISkillMatrix[]
+export interface ISkillState {
+  skills: ISkill[]
+  skillTopic: ISkillTopic | null
   loading: boolean
 }
 
-const skillMatrixData = {
-  skillMatrixes: [
+const skillData = {
+  skills: [
     {
       id: 1,
       name: 'Native JavaScript',
-      groups: [
+      topics: [
         {
           id: 1,
           name: 'This',
-          skills: [
+          questions: [
             {
               id: 1,
               name: 'What is `this`?'
@@ -40,7 +42,7 @@ const skillMatrixData = {
         {
           id: 2,
           name: 'Closure',
-          skills: [
+          questions: [
             {
               id: 1,
               name: 'What is the closure?'
@@ -60,11 +62,11 @@ const skillMatrixData = {
     {
       id: 2,
       name: 'Angular',
-      groups: [
+      topics: [
         {
           id: 1,
           name: 'Parts of Angular',
-          skills: [
+          questions: [
             {
               id: 1,
               name: 'Which parts of Angular do you know?'
@@ -86,7 +88,7 @@ const skillMatrixData = {
         {
           id: 2,
           name: 'Lifecycle',
-          skills: [
+          questions: [
             {
               id: 1,
               name: 'What is ngOnInit?'
@@ -106,32 +108,51 @@ const skillMatrixData = {
   ]
 }
 
-export const initialSkillMatrixState: ISkillMatrixState = {
-  skillMatrixes: [],
+export const initialSkillState: ISkillState = {
+  skills: [],
+  skillTopic: null,
   loading: false
 }
 
-export const SkillMatrixState: React.FC = ({ children }) => {
-  const [state, dispatch] = useReducer(skillMatrixReducer, initialSkillMatrixState)
+export const SkillState: React.FC = ({ children }) => {
+  const [state, dispatch] = useReducer(skillReducer, initialSkillState)
 
-  const setLoading = () => dispatch({type: ActionTypes.SET_SKILL_MATRIX_LOADING})
+  const setLoading = () => dispatch({type: ActionTypes.SET_SKILL_LOADING})
 
-  const getSkillMatrixes = () => {
+  const getSkills = () => {
     setLoading()
 
     dispatch({
-      type: ActionTypes.GET_SKILL_MATRIXES,
-      payload: skillMatrixData.skillMatrixes
+      type: ActionTypes.GET_SKILLS,
+      payload: skillData.skills
     })
   }
 
-  const { skillMatrixes, loading } = state
+  const getSkillTopic = (topicId: number, skillId: number) => {
+    setLoading()
+
+    const skill = _.find(skillData.skills, ['id', +skillId])
+    const topic = _.find(skill!.topics, ['id', +topicId])
+
+    dispatch({
+      type: ActionTypes.GET_SKILL_TOPIC,
+      payload: topic
+    })
+  }
+
+  const clearSkillTopic = () => {
+    dispatch({
+      type: ActionTypes.CLEAR_SKILL_TOPIC
+    })
+  }
+
+  const { skills, skillTopic, loading } = state
 
   return (
-    <SkillMatrixContext.Provider value={{
-      skillMatrixes, getSkillMatrixes, loading, setLoading
+    <SkillContext.Provider value={{
+      skills, getSkills, skillTopic, getSkillTopic, clearSkillTopic, loading, setLoading
     }}>
       {children}
-    </SkillMatrixContext.Provider>
+    </SkillContext.Provider>
   )
 }

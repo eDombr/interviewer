@@ -1,18 +1,18 @@
-export interface ISkillGroup {
+export interface ISkillTopic {
     id?: number
     name: string
-    skills: ISkill[]
+    questions: IQuestion[]
     isActive?: boolean
 }
 
-export interface ISkill {
+export interface IQuestion {
     id?: number
     name: string
     linkToResource?: string
 }
 
-export interface ISkillMatrix {
+export interface ISkill {
   id?: number
   name: string;
-  groups: ISkillGroup[]
+  topics: ISkillTopic[]
 }

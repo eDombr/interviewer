@@ -1,7 +1,7 @@
 import React from 'react'
-import { ISkill } from '../../../../../interfaces/Skill'
+import { IQuestion } from '../../../../../../interfaces/Skill'
 
-const SkillItem: React.FC<ISkill> = (props) => {
+const Question: React.FC<IQuestion> = (props) => {
   return (
     <li className="collection-item">
       <div>
@@ -19,4 +19,4 @@ const SkillItem: React.FC<ISkill> = (props) => {
   )
 }
 
-export default SkillItem
+export default Question

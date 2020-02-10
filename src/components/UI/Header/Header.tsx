@@ -6,7 +6,15 @@ import INavigationLink from '../../../interfaces/NavigationLink'
 import Dropdown from '../Dropdown/Dropdown'
 
 const navigationLinks: INavigationLink[] = [
-  { label: 'Skill Maxtrix', to: '/skill-matrix', exact: false },
+  { 
+    label: 'Skills', 
+    to: '/skills',
+    exact: false,
+    subLinks: [
+      { label: 'List', to: '/skills', exact: true },
+      { label: 'Add', to: '/skills/create', exact: true },
+    ]
+  },
   {
     label: 'Users',
     to: '/users',

@@ -1,7 +1,7 @@
 import * as _ from 'lodash'
 import React, { useContext, useEffect } from 'react'
-import { UserContext } from '../../context/user/userContext'
-import Loading from '../UI/Loading/Loading'
+import { UserContext } from '../../../context/user/userContext'
+import Loading from '../../UI/Loading/Loading'
 import { useParams } from 'react-router-dom'
 
 const UserProfile: React.FC = () => {

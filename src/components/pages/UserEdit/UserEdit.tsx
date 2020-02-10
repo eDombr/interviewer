@@ -2,13 +2,13 @@ import * as _ from 'lodash'
 import M from 'materialize-css'
 
 import React, { useState, useEffect, useContext } from 'react'
-import { FormControlCollection } from '../../interfaces/Form'
-import { formBuilder } from '../../lib/formBuilder'
-import Form from '../UI/Form/Form'
+import { FormControlCollection } from '../../../interfaces/Form'
+import { formBuilder } from '../../../lib/formBuilder'
+import Form from '../../UI/Form/Form'
 import { useParams } from 'react-router-dom'
-import { UserContext } from '../../context/user/userContext'
-import { IUser, IWorkHistoryItem } from '../../interfaces/User'
-import { InputType } from '../../constants/Form'
+import { UserContext } from '../../../context/user/userContext'
+import { IUser, IWorkHistoryItem } from '../../../interfaces/User'
+import { InputType } from '../../../constants/Form'
 
 const createFormControls = (): FormControlCollection => ({
   firstName: formBuilder.createControl(
@@ -59,7 +59,7 @@ const UserEdit: React.FC = () => {
   const { getUser, clearUser, user } = useContext(UserContext)
   const { id } = useParams()
 
-  const [formControls, setFormControls] = useState<any>(
+  const [formControls, setFormControls] = useState<FormControlCollection>(
     createFormControls()
   )
 
