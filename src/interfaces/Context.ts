@@ -1,8 +1,8 @@
 export interface IHandler {
-    [key: string]: Function
+  [key: string]: Function
 }
 
 export interface IAction {
-    type: string,
-    payload?: any;
+  type: string
+  payload?: any
 }

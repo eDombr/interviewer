@@ -53,7 +53,7 @@ const createWorkHistoryItem = (): FormControlCollection => ({
   endDate: formBuilder.createControl(
     { label: 'End Date', type: InputType.DATE }
   ),
-});
+})
 
 const UserEdit: React.FC = () => {
   const { getUser, clearUser, user } = useContext(UserContext)
@@ -93,7 +93,7 @@ const UserEdit: React.FC = () => {
 
   const onAddFormGroupHandler = (groupName: string): void => {
     const controls: FormControlCollection = _.cloneDeep(formControls)
-    const control = controls[groupName];
+    const control = controls[groupName]
 
     control.groups!.push(createWorkHistoryItem())
 
@@ -106,14 +106,18 @@ const UserEdit: React.FC = () => {
     _.forEach(user, (value, key) => {
       if (key !== 'workHistory') {
         if (controls[key]) {
-          controls[key].value = value
+          const control = controls[key]
+          control.value = value
+          control.valid = formBuilder.validate(control.value, control.validation)
         }
       } else {
         _.forEach(value as IWorkHistoryItem[], (workHistoryItem: IWorkHistoryItem, index: string | number) => {
           controls[key].groups.push(createWorkHistoryItem())
         
           _.forEach(workHistoryItem as IWorkHistoryItem, (historyItemValue: string | Date | undefined, historyItemKey: string) => {
-            controls[key].groups[index][historyItemKey].value = historyItemValue;
+            const control = controls[key].groups[index][historyItemKey]
+            control.value = historyItemValue
+            control.valid = formBuilder.validate(control.value, control.validation)
           })
         })
       }
@@ -132,7 +136,8 @@ const UserEdit: React.FC = () => {
         <Form 
           formControls={formControls}
           onAddGroup={onAddFormGroupHandler}
-          onChange={onChangeHandler}/>
+          onChange={onChangeHandler}
+          submitBtnLabel={`${id ? 'Edit' : 'Create'} User`}/>
 
       </div>
     </div>

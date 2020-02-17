@@ -10,7 +10,7 @@ type SkillTopicProps = {
 }
 
 const SkillTopic: React.FC<SkillTopicProps> = ({topic, skillId}) => {
-  const {questions, id, name} = topic;
+  const {questions, id, name} = topic
 
   const renderSkills = () => {
     return (

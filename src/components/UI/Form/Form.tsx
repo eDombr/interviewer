@@ -1,33 +1,32 @@
 import * as _ from 'lodash'
-import React, { useState, ReactNode, ReactNodeArray } from 'react'
+import React, { useState, ReactNode, ReactNodeArray, useEffect } from 'react'
 import { FormControlCollection, FormControl } from '../../../interfaces/Form'
 import { Input } from './Input/Input'
 import Button from '../Button/Button'
 import { formBuilder } from '../../../lib/formBuilder'
 import { InputType } from '../../../constants/Form'
+import FormGroup from './FormGroup/FormGroup'
 
 type FormProps = {
-  formControls: FormControlCollection;
-  onChange: (formControls: FormControlCollection) => void;
-  onAddGroup?: (groupName: string) => void;
+  formControls: FormControlCollection
+  onChange: (formControls: FormControlCollection) => void
+  submitBtnLabel?: string
+  onAddGroup?: (groupName: string) => void
 }
 
 const Form: React.FC<FormProps> = (props) => {
-  const [isFormValid, setFromValid] = useState<boolean>(false);
-  const fromControlsKeys = _.keys(props.formControls);
+  const [isFormValid, setFromValid] = useState<boolean>(false)
+  const fromControlsKeys = _.keys(props.formControls)
 
-  const onChangeHandler = (value: string, controlName: string, groupName?: string, groupIndex?: number): void => {
+  useEffect(() => {
+    setFromValid(formBuilder.validateForm(props.formControls))
+  }, [props.formControls])
+
+
+  const onChangeHandler = (value: string, controlName: string): void => {
     const formControls = { ...props.formControls }
-    let control;
-    let group;
-
-    if (groupName) {
-      group = _.cloneDeep(formControls[groupName])
-
-      control = { ...group.groups![groupIndex!][controlName] } 
-    } else {
-      control = { ...formControls[controlName] }
-    }
+    
+    const control = { ...formControls[controlName] }
 
     control.touched = true
     control.value = value
@@ -37,13 +36,15 @@ const Form: React.FC<FormProps> = (props) => {
       control.errorMessage = formBuilder.getErrorMessage(control)
     }
 
-    if (groupName) {
-      formControls[groupName].groups![groupIndex!][controlName] = control;
-    } else {
-      formControls[controlName] = control
-    }
+    formControls[controlName] = control
 
-    setFromValid(formBuilder.validateForm(formControls))
+    props.onChange(formControls)
+  }
+
+  const onChangeGroupHandler = (value: FormControlCollection, groupName: string, groupIndex: number): void => {
+    const formControls = { ...props.formControls }
+
+    formControls[groupName].groups![groupIndex!] = value
 
     props.onChange(formControls)
   }
@@ -57,7 +58,7 @@ const Form: React.FC<FormProps> = (props) => {
     props.onChange(formControls)
   }
 
-  const renderControl = (control: FormControl, controlName: string, groupName?: string, groupIndex?: number): ReactNode => {
+  const renderControl = (control: FormControl, controlName: string): ReactNode => {
     return <Input
       label={control.label}
       value={control.value}
@@ -66,32 +67,20 @@ const Form: React.FC<FormProps> = (props) => {
       touched={control.touched}
       type={control.type}
       errorMessage={control.errorMessage}
-      onChange={(value: string) => onChangeHandler(value, controlName, groupName, groupIndex)} />
+      onChange={(value: string) => onChangeHandler(value, controlName)} />
   }
 
   const renderGroups = (control: FormControl, controlName: string): ReactNodeArray => {
     return _.map(control.groups, (group, groupIndex) => {
-      const keys = _.keys(group);
 
       return (
-        <div className="card" key={groupIndex}>
-          <div className="card-content">
-            <i onClick={() => onRemoveGroupHandler(controlName, +groupIndex)} className="cursor-pointer card-close right material-icons">close</i>
-            <div>
-              {
-                _.map(keys, (groupControlName, groupControlIndex) => {
-                  const groupControl = group[groupControlName];
-
-                  return (
-                    <React.Fragment key={groupControlIndex}>
-                      {renderControl(groupControl, groupControlName, controlName, +groupIndex)}
-                    </React.Fragment>
-                  )
-                })
-              }
-            </div>
-          </div>
-        </div>
+        <FormGroup
+          key={groupIndex}
+          groupName={controlName}
+          formControls={group}
+          groupIndex={groupIndex}
+          onChange={onChangeGroupHandler}
+          onRemove={onRemoveGroupHandler}/>
       )
     })
   }
@@ -103,7 +92,7 @@ const Form: React.FC<FormProps> = (props) => {
         <form>
           {
             _.map(fromControlsKeys, (controlName, index) => {
-              const control = props.formControls[controlName];
+              const control = props.formControls[controlName]
 
               if (control.type === InputType.GROUP) {
                 return (
@@ -126,7 +115,7 @@ const Form: React.FC<FormProps> = (props) => {
           }
 
           <div className="right">
-            <Button disabled={!isFormValid} label="Submit" type="primary" />
+            <Button disabled={!isFormValid} label={props.submitBtnLabel || 'Submit'} type="primary" />
           </div>
         </form>
       </div>

@@ -1,8 +1,8 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 
-import { IUser } from '../../../../../interfaces/User';
-import FloatingButton from '../../../../UI/FloatingButton/FloatingButton';
+import { IUser } from '../../../../../interfaces/User'
+import FloatingButton from '../../../../UI/FloatingButton/FloatingButton'
 
 const UserItem: React.FC<IUser> = (props) => {
 

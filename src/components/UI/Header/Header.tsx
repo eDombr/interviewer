@@ -35,7 +35,7 @@ const navigationLinks: INavigationLink[] = [
 
 const Header: React.FC = () => {
   useEffect(() => {
-    M.AutoInit();
+    M.AutoInit()
   })
 
   const renderLinks = () => {

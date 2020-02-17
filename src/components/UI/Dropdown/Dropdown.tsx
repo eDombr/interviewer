@@ -3,8 +3,8 @@ import { NavLink } from 'react-router-dom'
 import INavigationLink from '../../../interfaces/NavigationLink'
 
 type DropdownProps = {
-  id: string;
-  links: INavigationLink[];
+  id: string
+  links: INavigationLink[]
 }
 
 const Dropdown: React.FC<DropdownProps> = (props) => {

@@ -58,7 +58,7 @@ const SkillTopicEdit: React.FC = () => {
 
   const onAddFormGroupHandler = (groupName: string): void => {
     const controls: FormControlCollection = _.cloneDeep(formControls)
-    const control = controls[groupName];
+    const control = controls[groupName]
 
     control.groups!.push(createQuestionGroup())
 
@@ -71,7 +71,9 @@ const SkillTopicEdit: React.FC = () => {
     _.forEach(skillTopic, (value, key) => {
       if (key !== 'questions') {
         if (controls[key]) {
-          controls[key].value = value
+          const control = controls[key]
+          control.value = value
+          control.valid = formBuilder.validate(control.value, control.validation)
         }
       } else {
         _.forEach(value as IQuestion[], (question: IQuestion, index: string | number) => {
@@ -83,7 +85,9 @@ const SkillTopicEdit: React.FC = () => {
               return
             }
 
-            controls[key].groups[index][questionKey].value = questionValue;
+            const control = controls[key].groups[index][questionKey]
+            control.value = questionValue
+            control.valid = formBuilder.validate(control.value, control.validation)
           })
         })
       }

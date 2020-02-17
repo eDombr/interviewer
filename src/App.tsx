@@ -1,17 +1,17 @@
-import React from 'react';
+import React from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
-import Layout from './hoc/Layout/Layout';
-import Auth from './components/pages/Auth/Auth';
-import Users from './components/pages/Users/Users';
-import Home from './components/pages/Home/Home';
-import UserProfile from './components/pages/UserProfile/UserProfile';
-import UserEdit from './components/pages/UserEdit/UserEdit';
-import { UserState } from './context/user/userState';
+import Layout from './hoc/Layout/Layout'
+import Auth from './components/pages/Auth/Auth'
+import Users from './components/pages/Users/Users'
+import Home from './components/pages/Home/Home'
+import UserProfile from './components/pages/UserProfile/UserProfile'
+import UserEdit from './components/pages/UserEdit/UserEdit'
+import { UserState } from './context/user/userState'
 import SkillList from './components/pages/SkillList/SkillList'
-import { SkillState } from './context/skill/skillState';
-import SkillTopicEdit from './components/pages/SkillTopicEdit/SkillTopicEdit';
-import SkillEdit from './components/pages/SkillEdit/SkillEdit';
+import { SkillState } from './context/skill/skillState'
+import SkillTopicEdit from './components/pages/SkillTopicEdit/SkillTopicEdit'
+import SkillEdit from './components/pages/SkillEdit/SkillEdit'
 
 const App: React.FC = () => {
   return (
@@ -34,8 +34,8 @@ const App: React.FC = () => {
         </BrowserRouter>
       </UserState>
     </SkillState>
-  );
+  )
 }
 
-export default App;
+export default App
  

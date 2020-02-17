@@ -8,7 +8,7 @@ type SkillProps = {
 }
 
 const Skill: React.FC<SkillProps> = ({ skill }) => {
-  const collapsibleRef = useRef<HTMLUListElement>(null);
+  const collapsibleRef = useRef<HTMLUListElement>(null)
 
   const renderTopic = (topics: ISkillTopic[]) => {
     return _.map(topics, (topic) => 
@@ -23,7 +23,7 @@ const Skill: React.FC<SkillProps> = ({ skill }) => {
   useEffect(() => {
     M.Collapsible.init(collapsibleRef.current!, {
       accordion: false
-    });
+    })
   }, [])
 
   return (

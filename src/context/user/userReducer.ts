@@ -1,6 +1,6 @@
-import { IUserState } from './userState';
-import { IHandler, IAction } from './../../interfaces/Context';
-import { ActionTypes } from './../actionTypes';
+import { IUserState } from './userState'
+import { IHandler, IAction } from './../../interfaces/Context'
+import { ActionTypes } from './../actionTypes'
 
 const handlers: IHandler = {
     [ActionTypes.GET_USERS]: (state: IUserState, action: IAction): IUserState => ({...state, users: action.payload, loading: false}),

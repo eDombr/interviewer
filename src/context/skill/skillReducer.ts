@@ -1,6 +1,6 @@
-import { ActionTypes } from '../actionTypes';
-import { IAction, IHandler } from '../../interfaces/Context';
-import { ISkillState } from './skillState';
+import { ActionTypes } from '../actionTypes'
+import { IAction, IHandler } from '../../interfaces/Context'
+import { ISkillState } from './skillState'
 
 const handlers: IHandler = {
   [ActionTypes.GET_SKILLS]: (state: ISkillState, action: IAction): ISkillState => ({...state, skills: action.payload, loading: false}),

@@ -1,14 +1,14 @@
 import React, { MouseEvent } from 'react'
 
 type ButtonProps = {
-  label: string;
-  type: string;
-  disabled?: boolean;
-  clickButton?: () => void;
+  label: string
+  type: string
+  disabled?: boolean
+  clickButton?: () => void
 }
 
 const Button: React.FC<ButtonProps> = (props) => {
-  const cls = ['darken-1', 'btn'];
+  const cls = ['darken-1', 'btn']
 
   switch(props.type) {
     case 'primary': 
@@ -40,4 +40,4 @@ const Button: React.FC<ButtonProps> = (props) => {
   )
 }
 
-export default Button;
+export default Button

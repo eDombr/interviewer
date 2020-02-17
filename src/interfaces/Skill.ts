@@ -13,6 +13,6 @@ export interface IQuestion {
 
 export interface ISkill {
   id?: number
-  name: string;
+  name: string
   topics: ISkillTopic[]
 }

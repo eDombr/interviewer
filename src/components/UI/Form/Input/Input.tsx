@@ -1,38 +1,38 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react'
 import M from 'materialize-css'
-import { InputType } from '../../../../constants/Form';
+import { InputType } from '../../../../constants/Form'
 
 type InputProps = {
-  type?: string;
-  value: string;
-  label: string;
-  valid: boolean;
-  touched: boolean;
-  errorMessage?: string;
-  shouldValidate: boolean;
-  onChange: (value: string) => void;
+  type?: string
+  value: string
+  label: string
+  valid: boolean
+  touched: boolean
+  errorMessage?: string
+  shouldValidate: boolean
+  onChange: (value: string) => void
 }
 
 function isInvalid({ valid, touched, shouldValidate }: { valid: boolean, touched: boolean, shouldValidate: boolean }) {
-  return !valid && shouldValidate && touched;
+  return !valid && shouldValidate && touched
 }
 
 export const Input: React.FC<InputProps> = ({type, value, onChange, label, errorMessage, touched, valid, shouldValidate}) => {
   const inputType: string = type || InputType.TEXT
   const htmlFor: string = `${inputType}-${Math.random()}`
-  const cls = ['validate'];
+  const cls = ['validate']
 
   const inputRef = useRef<HTMLInputElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
   useEffect(() => {
     if (inputRef.current) {
-      const defaultDate = value ? new Date(value) : new Date();
+      const defaultDate = value ? new Date(value) : new Date()
       M.Datepicker.init(inputRef.current!, {
         defaultDate,
         setDefaultDate: true,
         onSelect: (value) => {
-          onChange(value.toDateString());
+          onChange(value.toDateString())
         }
       })
     }

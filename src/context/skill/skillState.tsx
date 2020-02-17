@@ -1,9 +1,9 @@
 import * as _ from 'lodash'
-import React, { useReducer } from 'react';
-import { SkillContext } from './skillContext';
-import { ISkill, ISkillTopic } from '../../interfaces/Skill';
-import { skillReducer } from './skillReducer';
-import { ActionTypes } from '../actionTypes';
+import React, { useReducer } from 'react'
+import { SkillContext } from './skillContext'
+import { ISkill, ISkillTopic } from '../../interfaces/Skill'
+import { skillReducer } from './skillReducer'
+import { ActionTypes } from '../actionTypes'
 
 export interface ISkillState {
   skills: ISkill[]

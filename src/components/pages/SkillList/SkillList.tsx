@@ -1,9 +1,9 @@
 import * as _ from 'lodash'
 import React, { useEffect, useContext } from 'react'
 
-import { SkillContext } from '../../../context/skill/skillContext';
-import Loading from '../../UI/Loading/Loading';
-import Skill from './Skill/Skill';
+import { SkillContext } from '../../../context/skill/skillContext'
+import Loading from '../../UI/Loading/Loading'
+import Skill from './Skill/Skill'
 
 const SkillList: React.FC = () => {
   const {skills, getSkills, loading} = useContext(SkillContext)
@@ -30,4 +30,4 @@ const SkillList: React.FC = () => {
   )
 }
 
-export default SkillList;
+export default SkillList

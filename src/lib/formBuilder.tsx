@@ -1,6 +1,6 @@
 import * as _ from 'lodash'
 import { FormControlConfig, FormValidation, FormControl } from "../interfaces/Form"
-const is = require('is_js');
+const is = require('is_js')
 
 export const formBuilder = {
   createControl: (config: FormControlConfig, validation?: FormValidation): FormControl => {
@@ -14,14 +14,14 @@ export const formBuilder = {
   },
   validate: (value: string, validation?: FormValidation): boolean => {
     if (!validation) {
-      return true;
+      return true
     }
   
-    let isValid = true;
+    let isValid = true
 
     if (_.isString(value)) {
       if (validation.required) {
-        isValid = !!value.trim() && isValid;
+        isValid = !!value.trim() && isValid
       }
   
       if (validation.email) {
@@ -34,10 +34,10 @@ export const formBuilder = {
     }
   
   
-    return isValid;
+    return isValid
   },
   validateForm: (formControls: {[key: string]: FormControl}): boolean => {
-    let isFormValid = true;
+    let isFormValid = true
 
     _.forEach(formControls, (control) => {
       if (control.type === 'group') {
@@ -51,14 +51,14 @@ export const formBuilder = {
       }
     })
   
-    return isFormValid;
+    return isFormValid
   },
   getErrorMessage({ value, label, validation }: { value: string, label: string, validation?: FormValidation }): string {
     if (!validation) {
-      return '';
+      return ''
     }
   
-    let errorMessage = `Enter correct ${label}`;
+    let errorMessage = `Enter correct ${label}`
 
     if (!value) {
       if (validation.required) {
@@ -74,6 +74,6 @@ export const formBuilder = {
       }
     }
   
-    return errorMessage;
+    return errorMessage
   }
 }

@@ -1,9 +1,9 @@
 import * as _ from 'lodash'
-import React, { useReducer } from 'react';
-import { UserContext } from './userContext';
-import { userReducer } from './userReducer';
-import { IUser } from '../../interfaces/User';
-import { ActionTypes } from '../actionTypes';
+import React, { useReducer } from 'react'
+import { UserContext } from './userContext'
+import { userReducer } from './userReducer'
+import { IUser } from '../../interfaces/User'
+import { ActionTypes } from '../actionTypes'
 
 export interface IUserState {
   users: IUser[],

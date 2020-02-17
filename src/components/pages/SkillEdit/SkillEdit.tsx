@@ -30,7 +30,7 @@ const SkillEdit: React.FC = () => {
 
   const onAddFormGroupHandler = (groupName: string): void => {
     const controls: FormControlCollection = _.cloneDeep(formControls)
-    const control = controls[groupName];
+    const control = controls[groupName]
 
     control.groups!.push(createTopicGroup())
 

@@ -1,17 +1,17 @@
 import React, { MouseEvent } from 'react'
 
 type FloatingButtonProps = {
-  type?: string;
-  size?: string;
-  icon: string;
+  type?: string
+  size?: string
+  icon: string
   clickButton?: () => void
 }
 
 const FloatingButton: React.FC<FloatingButtonProps> = (props) => {
-  const cls = ['darken-1', 'btn-floating', 'waves-effect', 'waves-light', 'mx0_5'];
+  const cls = ['darken-1', 'btn-floating', 'waves-effect', 'waves-light', 'mx0_5']
 
   if (props.size) {
-    cls.push(`btn-${props.size}`);
+    cls.push(`btn-${props.size}`)
   }
 
   switch(props.type) {

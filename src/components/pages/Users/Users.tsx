@@ -1,10 +1,10 @@
 import React, { useContext, useEffect } from 'react'
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 
-import UserTable from './UserTable/UserTable';
-import FloatingButton from '../../UI/FloatingButton/FloatingButton';
-import { UserContext } from '../../../context/user/userContext';
-import Loading from '../../UI/Loading/Loading';
+import UserTable from './UserTable/UserTable'
+import FloatingButton from '../../UI/FloatingButton/FloatingButton'
+import { UserContext } from '../../../context/user/userContext'
+import Loading from '../../UI/Loading/Loading'
 
 const Users: React.FC = () => {
   const {users, getUsers, loading} = useContext(UserContext)
