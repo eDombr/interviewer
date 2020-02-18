@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react'
 import * as _ from 'lodash'
 
 import { FormControlCollection, FormControl } from '../../../../interfaces/Form'
-import { Input } from '../Input/Input'
+import { FormField } from '../FormField/FormField'
 import { formBuilder } from '../../../../lib/formBuilder'
 
 type FormGroupProps = {
@@ -17,7 +17,7 @@ const FormGroup: React.FC<FormGroupProps> = (props) => {
   const fromControlsKeys = _.keys(props.formControls)
 
   const renderControl = (control: FormControl, controlName: string, groupName: string, groupIndex: number): ReactNode => {
-    return <Input
+    return <FormField
       label={control.label}
       value={control.value}
       valid={control.valid}

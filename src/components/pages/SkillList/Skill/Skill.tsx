@@ -30,7 +30,7 @@ const Skill: React.FC<SkillProps> = ({ skill }) => {
     <>
       <h3>{skill.name}</h3>
       <ul ref={collapsibleRef} className="collapsible">
-        {renderTopic(skill.topics)}
+        {renderTopic(skill.topics!)}
       </ul>
     </>
   )

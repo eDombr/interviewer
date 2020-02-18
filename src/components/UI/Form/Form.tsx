@@ -1,7 +1,7 @@
 import * as _ from 'lodash'
 import React, { useState, ReactNode, ReactNodeArray, useEffect } from 'react'
 import { FormControlCollection, FormControl } from '../../../interfaces/Form'
-import { Input } from './Input/Input'
+import { FormField } from './FormField/FormField'
 import Button from '../Button/Button'
 import { formBuilder } from '../../../lib/formBuilder'
 import { InputType } from '../../../constants/Form'
@@ -59,7 +59,7 @@ const Form: React.FC<FormProps> = (props) => {
   }
 
   const renderControl = (control: FormControl, controlName: string): ReactNode => {
-    return <Input
+    return <FormField
       label={control.label}
       value={control.value}
       valid={control.valid}

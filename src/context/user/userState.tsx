@@ -33,6 +33,13 @@ const usersData = {
           startDate: new Date(2016, 11, 12),
           position: 'Frontend Developer'
         },
+      ],
+      skills: [
+        { id: 1, name: 'Angular' },
+        { id: 2, name: 'Javascript' },
+        { id: 3, name: 'NodeJs' },
+        { id: 4, name: 'React' },
+        { id: 5, name: 'Mongo' },
       ]
     },
     {

@@ -7,7 +7,7 @@ export default class Layout extends Component {
     return (
       <div className={classes.Layout}>
         <Header />
-        <div className="container">
+        <div className="page-wrapper container">
           {this.props.children}
         </div>
       </div>

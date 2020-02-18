@@ -1,3 +1,4 @@
+import { ISkill } from './Skill';
 export interface IUser {
   id?: number
   firstName: string
@@ -9,6 +10,7 @@ export interface IUser {
   description?: string
   currentPosition?: string
   workHistory?: IWorkHistoryItem[]
+  skills: ISkill[]
 }
 
 export interface IWorkHistoryItem {
